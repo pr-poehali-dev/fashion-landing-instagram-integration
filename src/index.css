@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Oswald:wght@400;500;600;700&family=Bebas+Neue&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,35 +7,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 41 25% 96%;
+    --foreground: 210 20% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 20% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 20% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 16 100% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 50 100% 50%;
+    --secondary-foreground: 210 20% 15%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 41 30% 92%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 334 100% 68%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
+    --border: 210 20% 85%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.1rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -57,17 +57,17 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 16 90% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 50 90% 45%;
+    --secondary-foreground: 210 20% 15%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 334 90% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -93,20 +93,23 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-retro-bg text-retro-navy font-sans;
+  }
+
+  h1, h2, h3 {
+    @apply font-bebas-neue tracking-wider;
   }
 }
 
 @layer utilities {
+  /* Базовые анимации */
   .fade-in {
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   }
 
   .animate-fade-in {
-    opacity: 1;
-    transform: translateY(0);
+    animation: fade-in 0.5s ease-out forwards;
   }
 
   .hover-scale {
@@ -114,6 +117,138 @@
   }
 
   .hover-scale:hover {
-    transform: scale(1.03);
+    transform: scale(1.05);
   }
+
+  /* Ретро-паттерны и эффекты */
+  .retro-circle {
+    position: relative;
+  }
+
+  .retro-circle::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: transparent;
+    border: 8px solid;
+    opacity: 0.15;
+    z-index: -1;
+  }
+
+  .retro-dots {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .retro-dots::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+    background-size: 15px 15px;
+    opacity: 0.1;
+    z-index: -1;
+  }
+
+  .retro-waves {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .retro-waves::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      currentColor,
+      currentColor 2px,
+      transparent 2px,
+      transparent 10px
+    );
+    opacity: 0.05;
+    z-index: -1;
+  }
+
+  .retro-checkerboard {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .retro-checkerboard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(45deg, currentColor 25%, transparent 25%),
+      linear-gradient(-45deg, currentColor 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, currentColor 75%),
+      linear-gradient(-45deg, transparent 75%, currentColor 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    opacity: 0.05;
+    z-index: -1;
+  }
+
+  .retro-border {
+    border: 4px solid;
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Стили для декоративных элементов 60-х */
+.flower-power {
+  position: relative;
+}
+
+.flower-power::before {
+  content: "✿";
+  position: absolute;
+  color: theme('colors.retro-pink');
+  font-size: 2rem;
+}
+
+.mod-circle {
+  background: theme('colors.retro-yellow');
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  display: grid;
+  place-items: center;
+}
+
+.pop-art-dots {
+  position: relative;
+  z-index: 1;
+}
+
+.pop-art-dots::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(theme('colors.retro-red') 15%, transparent 16%), 
+                    radial-gradient(theme('colors.retro-teal') 15%, transparent 16%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.zigzag-decoration {
+  position: relative;
+}
+
+.zigzag-decoration::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(45deg, transparent 33.333%, theme('colors.retro-orange') 33.333%, theme('colors.retro-orange') 66.667%, transparent 66.667%),
+              linear-gradient(-45deg, transparent 33.333%, theme('colors.retro-orange') 33.333%, theme('colors.retro-orange') 66.667%, transparent 66.667%);
+  background-size: 20px 20px;
 }

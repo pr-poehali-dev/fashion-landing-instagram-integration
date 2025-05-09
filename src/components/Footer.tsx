@@ -5,35 +5,56 @@ import { Input } from "@/components/ui/input";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1A1F2C] text-white pt-16 pb-8">
-      <div className="container mx-auto px-4">
+    <footer className="bg-retro-navy text-white pt-16 pb-8 relative">
+      {/* Декоративные элементы в стиле 60-х */}
+      <div className="absolute top-0 left-0 right-0 h-6 bg-retro-red"></div>
+      <div className="absolute inset-0 retro-dots text-white"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
           {/* Блок с логотипом и соцсетями */}
           <div className="md:col-span-4 fade-in">
-            <h2 className="font-playfair text-2xl font-bold mb-4">СТИЛЬ</h2>
-            <p className="text-gray-300 mb-6 max-w-xs">
-              Модный блог о трендах, стиле жизни и любимых брендах. Вдохновляйся и создавай свой уникальный образ!
-            </p>
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="mod-circle w-10 h-10 bg-retro-yellow flex items-center justify-center text-retro-navy font-bebas-neue text-xl">
+                МОД
+              </div>
+              <h2 className="font-bebas-neue text-3xl tracking-widest text-white">
+                СТИЛЬ<span className="text-retro-orange">60</span>
+              </h2>
+            </div>
+            
+            <div className="bg-retro-beige/10 p-6 mb-6 max-w-xs">
+              <p className="text-retro-beige font-oswald">
+                Блог о моде 60-х годов: мини-юбки, гоу-гоу, психоделические принты и всё, что определило эту яркую эпоху!
+              </p>
+            </div>
+            
             <div className="flex gap-4">
-              {["Instagram", "Youtube", "TikTok", "Pinterest"].map((social) => (
-                <a 
-                  key={social} 
-                  href="#" 
-                  className="w-10 h-10 bg-white/10 hover:bg-[#9B87F5] rounded-full flex items-center justify-center transition-colors"
-                >
-                  <Icon name={social} size={20} />
-                </a>
-              ))}
+              {["Instagram", "Youtube", "TikTok", "Pinterest"].map((social, index) => {
+                // Чередуем цвета для иконок
+                const colors = ["bg-retro-orange", "bg-retro-yellow", "bg-retro-mint", "bg-retro-pink"];
+                const colorClass = colors[index % colors.length];
+                
+                return (
+                  <a 
+                    key={social} 
+                    href="#" 
+                    className={`w-10 h-10 ${colorClass} hover:scale-110 transition-transform rounded-none flex items-center justify-center`}
+                  >
+                    <Icon name={social} size={20} className="text-retro-navy" />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
           {/* Навигация */}
           <div className="md:col-span-2 fade-in">
-            <h3 className="font-medium text-lg mb-4">Навигация</h3>
-            <ul className="space-y-2">
-              {["Главная", "Образы", "Бренды", "Блог", "Контакты"].map((item) => (
+            <h3 className="font-bebas-neue text-2xl mb-4 tracking-wider text-retro-yellow">СТРАНИЦЫ</h3>
+            <ul className="space-y-3">
+              {["ГЛАВНАЯ", "ОБРАЗЫ", "БРЕНДЫ", "БЛОГ", "КОНТАКТЫ"].map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                  <a href="#" className="text-retro-beige hover:text-retro-orange transition-colors font-oswald tracking-wide">
                     {item}
                   </a>
                 </li>
@@ -43,11 +64,11 @@ const Footer = () => {
 
           {/* Категории */}
           <div className="md:col-span-2 fade-in">
-            <h3 className="font-medium text-lg mb-4">Категории</h3>
-            <ul className="space-y-2">
-              {["Повседневное", "Офисный стиль", "Вечерние образы", "Аксессуары", "Обувь"].map((item) => (
+            <h3 className="font-bebas-neue text-2xl mb-4 tracking-wider text-retro-pink">РУБРИКИ</h3>
+            <ul className="space-y-3">
+              {["ТВИГГИ", "МИНИ-ЮБКИ", "МЭРИ КУАНТ", "МОДЕРНИЗМ", "ГОУ-ГОУ"].map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                  <a href="#" className="text-retro-beige hover:text-retro-pink transition-colors font-oswald tracking-wide">
                     {item}
                   </a>
                 </li>
@@ -57,37 +78,47 @@ const Footer = () => {
 
           {/* Подписка */}
           <div className="md:col-span-4 fade-in">
-            <h3 className="font-medium text-lg mb-4">Подписаться на рассылку</h3>
-            <p className="text-gray-300 mb-4">
-              Получайте новости о трендах, советы по стилю и эксклюзивные предложения.
-            </p>
-            <div className="flex gap-2">
-              <Input 
-                type="email" 
-                placeholder="Ваш email" 
-                className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-              />
-              <Button className="bg-[#9B87F5] hover:bg-[#8B5CF6] text-white">
-                <Icon name="Send" size={16} />
-              </Button>
+            <h3 className="font-bebas-neue text-2xl mb-4 tracking-wider text-retro-orange">ПОДПИСКА НА РАССЫЛКУ</h3>
+            <div className="bg-white/10 p-6 mb-6">
+              <p className="text-retro-beige mb-4 font-oswald">
+                Получайте новости о мире ретро-моды, винтажных находках и событиях в стиле 60-х!
+              </p>
+              <div className="flex gap-0">
+                <Input 
+                  type="email" 
+                  placeholder="ВАШ EMAIL" 
+                  className="bg-white text-retro-navy placeholder:text-retro-navy/50 rounded-none border-none font-space-mono"
+                />
+                <Button className="bg-retro-red hover:bg-retro-orange text-white rounded-none">
+                  <Icon name="Send" size={16} />
+                </Button>
+              </div>
+            </div>
+            
+            {/* Декоративный элемент в стиле 60-х */}
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-1 bg-retro-orange"></div>
+              <div className="w-12 h-1 bg-retro-yellow"></div>
+              <div className="w-12 h-1 bg-retro-pink"></div>
+              <div className="w-12 h-1 bg-retro-teal"></div>
             </div>
           </div>
         </div>
 
         {/* Нижняя часть футера */}
         <div className="border-t border-white/10 pt-6 mt-6 flex flex-col md:flex-row justify-between items-center gap-4 fade-in">
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Стиль. Все права защищены.
+          <p className="text-retro-beige/70 text-sm font-space-mono">
+            © {new Date().getFullYear()} СТИЛЬ60. ВСЕ ПРАВА ЗАЩИЩЕНЫ.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-              Политика конфиденциальности
+            <a href="#" className="text-retro-beige/70 hover:text-retro-yellow text-sm transition-colors font-space-mono">
+              ПРИВАТНОСТЬ
             </a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-              Условия использования
+            <a href="#" className="text-retro-beige/70 hover:text-retro-yellow text-sm transition-colors font-space-mono">
+              УСЛОВИЯ
             </a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-              Cookies
+            <a href="#" className="text-retro-beige/70 hover:text-retro-yellow text-sm transition-colors font-space-mono">
+              COOKIES
             </a>
           </div>
         </div>

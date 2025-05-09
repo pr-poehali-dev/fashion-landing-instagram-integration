@@ -13,7 +13,10 @@ const Index = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in");
+            // Добавляем задержку для каскадной анимации
+            setTimeout(() => {
+              entry.target.classList.add("animate-fade-in");
+            }, entry.target.dataset.delay || 0);
             observer.unobserve(entry.target);
           }
         });
@@ -21,7 +24,9 @@ const Index = () => {
       { threshold: 0.1 }
     );
 
-    document.querySelectorAll(".fade-in").forEach((el) => {
+    document.querySelectorAll(".fade-in").forEach((el, index) => {
+      // Устанавливаем разную задержку для элементов
+      el.setAttribute("data-delay", (index * 100).toString());
       observer.observe(el);
     });
 
@@ -33,9 +38,9 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F5F0E5] font-sans">
+    <div className="min-h-screen bg-retro-bg font-sans">
       <Header />
-      <main>
+      <main className="overflow-hidden">
         <HeroSection />
         <InstagramFeed />
         <BrandCards />
